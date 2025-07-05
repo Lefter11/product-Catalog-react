@@ -1,34 +1,41 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./Components/Cart";
 import ProductCatalog from "./Components/ProductCatalog";
-import { useState,useEffect } from "react";
+import { useState } from "react";
+import { initProducts } from "./config";
 
 function App() {
+	const [productCatalog, setProductCatalog] = useState(initProducts);
+	const [cart, setCart] = useState([]);
 
-  const [cart, setCart] = useState([]);
-  const [productCatalog, setProductCatalog] = useState([]);
+	const addProduct = (newProduct) => {
+		setProductCatalog((prevCatalog) => [...prevCatalog, newProduct]);
+	};
 
 
- async function fetchProducts()
-  {
-
-   const result = await fetch('https://api.escuelajs.co/api/v1/products');
-   const data = await result.json();
-   setProductCatalog(data);
-    
-  }
-
+	const addToCart = (productId) => {
+		const product = productCatalog.find((p) => p.id === productId);
+		if (product) {
+			setCart((prevCart) => [...prevCart, product]);
+		}
+	};
 
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='/' element={<ProductCatalog />} />
-				<Route path='/Cart' element={<Cart/>} />
-
-</Routes>
-			<footer>
-				<p>© 2025 My Website</p>
-			</footer>
+				<Route
+					path='/'
+					element={
+						<ProductCatalog
+							productCatalog={productCatalog}
+							addProduct={addProduct}
+							addToCart={addToCart}
+							cartNumber={cart.length}
+						/>
+					}
+				/>
+				<Route path='/Cart' element={<Cart cart={cart} />} />
+			</Routes>
 		</BrowserRouter>
 	);
 }
