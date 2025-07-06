@@ -1,0 +1,22 @@
+
+
+.cartPage{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content:center;
+   
+    margin: 20px 20px;
+}
+
+.cartPage >p{
+    width: 500px ;
+    height: 200px;
+    line-height:300px;
+    border:1px solid cyan;
+    font-size: x-large;
+}
+
+
+

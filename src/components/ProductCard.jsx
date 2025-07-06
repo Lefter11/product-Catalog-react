@@ -12,6 +12,7 @@ function ProductCard({ product }) {
 				margin: "10px",
 			}}
 		>
+			
 			<h2>{product.title}</h2>
 			<div>Price: {product.price}</div>
 			<div>Description: {product.description}</div>
