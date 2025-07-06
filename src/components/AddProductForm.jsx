@@ -1,7 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useAppStore } from "../store/useAppStore";
 
-function AddProductForm({ productCatalog, addProduct }) {
+function AddProductForm() {
+	const productCatalog = useAppStore((state) => state.productCatalog);
+	const addProduct = useAppStore((state) => state.addProduct);
+
 	const [newProductFormData, setNewProductFormData] = useState({
 		title: "",
 		price: "",

@@ -1,5 +1,7 @@
-function ProductCard({ product, addToCart }) {
-	console.log("Product Card:", product);
+import { useAppStore } from "../store/useAppStore";
+
+function ProductCard({ product }) {
+	const addToCart = useAppStore((state) => state.addToCart);
 
 	return (
 		<div
