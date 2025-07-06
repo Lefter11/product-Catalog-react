@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAppStore } from "../store/useAppStore";
 
-function Cart({ cart }) {
+function Cart() {
+	const cart = useAppStore((state) => state.cart);
+
 	return (
 		<div>
 			<h1>Shopping Cart</h1>

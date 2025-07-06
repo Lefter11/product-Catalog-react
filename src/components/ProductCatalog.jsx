@@ -1,23 +1,21 @@
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import AddProductForm from "./AddProductForm";
+import { useAppStore } from "../store/useAppStore";
 
-function ProductCatalog({ productCatalog, addProduct, addToCart, cartNumber }) {
+function ProductCatalog() {
+	const products = useAppStore((state) => state.productCatalog);
+	const cart = useAppStore((state) => state.cart);
+	const cartNumber = cart.length;
+
 	return (
 		<div>
 			<h1>Product Catalog</h1>
 			<Link to='/Cart'> CART {cartNumber}</Link>
-			{productCatalog.map((product) => (
-				<ProductCard
-					key={product.id}
-					product={product}
-					addToCart={addToCart}
-				/>
+			{products.map((product) => (
+				<ProductCard key={product.id} product={product} />
 			))}
-			<AddProductForm
-				productCatalog={productCatalog}
-				addProduct={addProduct}
-			/>
+			<AddProductForm />
 		</div>
 	);
 }
